@@ -899,7 +899,10 @@ Hooks:PostHook(UpgradesTweakData, "_init_pd2_values", "ResSkillsInit", function(
 					self.values.shotgun.swap_speed_multiplier = {1.6}
 					self.values.saw.swap_speed_multiplier = {1.6}
 					self.skill_descs.overkill = {
-					skill_value_b1 = tostring(self.values.temporary.overkill_damage_multiplier[1][1] % 1 * 100).."%" -- OVK's damage increase
+					skill_value_b1 = tostring(self.values.temporary.overkill_damage_multiplier[1][1] % 1 * 100).."%", -- OVK's damage increase
+					skill_value_b2 = tostring(self.values.temporary.overkill_damage_multiplier[1][2]), -- Duration of OVK					
+					skill_value_p1 = tostring(self.values.temporary.overkill_damage_multiplier[2][2]),
+					skill_value_p2 = tostring(self.values.shotgun.swap_speed_multiplier[1] % 1 * 100).."%" -- Swap speed bonus
 					}
 			
 		--Juggernaut--
@@ -912,7 +915,7 @@ Hooks:PostHook(UpgradesTweakData, "_init_pd2_values", "ResSkillsInit", function(
 					
 					self.skill_descs.oppressor = {
 					skill_value_b1 = tostring(self.values.player.resist_melee_push[1] * 100).."%", -- Melee push resistance (depends of armor)
-					skill_value_p1 = tostring(self.values.player.flashbang_multiplier[2] * 100).."%" -- Duration of flashbang effect
+					skill_value_p1 = tostring(self.values.player.flashbang_multiplier[2] * 100).."%" -- Reduce duration of flashbang effect
 					}
 				
 				--Die Hard
@@ -1248,6 +1251,14 @@ Hooks:PostHook(UpgradesTweakData, "_init_pd2_values", "ResSkillsInit", function(
 					{ ammo = 0.03, time = 12, headshots = 2, to_magazine = false } --Ace
 				}
 				
+				self.skill_descs.fast_fire = {
+				skill_value_ub1 = "3", -- Amount of headshot kills to return ammo
+				skill_value_ub2 = "8", -- Timer
+				skill_value_ub3 = "3%", -- Amount of ammo which will be returned in % (minimum 1 ammo)
+				skill_value_up1 = "2", -- Amount of headshot kills for ace version
+				skill_value_up2 = "12" -- Timer for ace version
+				}
+				
 			--Mind Blown, formerly Explosive Headshot, formerly Graze
 				self.values.snp.graze_damage = {
 					{ --Basic
@@ -1266,6 +1277,16 @@ Hooks:PostHook(UpgradesTweakData, "_init_pd2_values", "ResSkillsInit", function(
 					}
 				}			
 				self.values.player.headshot_no_falloff = {true}
+				
+				self.skill_descs.body_expertise = {
+				skill_value_ub1 = "70%", -- Minimal ricochet damage
+				skill_value_ub2 = "4", -- Minimal radius (in meters) to ricochet
+				skill_value_ub3 = "8", -- Give bonus damage and enemy chain for every X meters.
+				skill_value_ub4 = "3", -- Max ricochet chain possible
+				skill_value_up1 = "1", -- This is how much increased (in meters) minimal radius
+				skill_value_up2 = "10%", -- Ricochet damage increase for every X meters
+				skill_value_up3 = "100%" -- Max ricochet damage
+				}
 
 	--GHOST--
 		--Shinobi--
@@ -1651,10 +1672,25 @@ Hooks:PostHook(UpgradesTweakData, "_init_pd2_values", "ResSkillsInit", function(
 					{accuracy_bonus = 0.92, max_stacks = 5, max_time = 8} --Ace
 				}
 				
+				self.skill_descs.expert_handling = {
+				skill_value_ub1 = "8%", -- Accuracy bonus per stack
+				skill_value_ub2 = "4", -- Duration of buff (basic)
+				skill_value_ub3 = "5", -- Max amount of stacks
+				skill_value_up1 = "8" -- Duration of buff (ace)
+				}
+				
 			--Trigger Happy
 				self.values.pistol.stacking_hit_damage_multiplier = {
 					{damage_bonus = 1.05, max_stacks = 5, max_time = 4}, --Basic
 					{damage_bonus = 1.05, max_stacks = 10, max_time = 8} --Ace
+				}
+				
+				self.skill_descs.trigger_happy = {
+				skill_value_ub1 = "5%", -- Damage bonus per stack
+				skill_value_ub2 = "4", -- Duration of buff (basic)
+				skill_value_ub3 = "5", -- Max stacks (basic)
+				skill_value_up1 = "8", -- Duration of buff (ace)
+				skill_value_up2 = "5" -- How many additional stacks give ace version
 				}
 			
 		--Revenant
